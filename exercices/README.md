@@ -36,5 +36,6 @@ Exercices pratiques réalisés pendant la formation, organisés par module.
 | # | Exercice | Fichier |
 |---|---|---|
 | 1 | Construire un pipeline RAG de bout en bout | [exercice1-pipeline-rag.md](module4/exercice1-pipeline-rag.md) |
+| 2 | Exposer votre agent via FastAPI | [exercice2-fastapi.md](module4/exercice2-fastapi.md) |
 
-Code source : [`exercices/module4/rag/`](module4/rag/) (ingest.py, chunk.py, vectorstore.py, query.py)
+Code source : [`exercices/module4/rag/`](module4/rag/) (ingest.py, chunk.py, vectorstore.py, query.py, api.py)
