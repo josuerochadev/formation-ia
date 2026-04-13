@@ -34,6 +34,9 @@ exercices/**/cnil/
 *.swo
 *~
 
+# Claude Code
+CLAUDE.md
+
 # OS
 .DS_Store
 Thumbs.db
