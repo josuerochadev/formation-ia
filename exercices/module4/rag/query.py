@@ -1,10 +1,14 @@
 """
 Étape 4 — Interrogation du pipeline RAG.
 Recherche les chunks pertinents et génère une réponse contextuelle via LLM.
+Exercice 3 : retry avec backoff exponentiel + timeout.
 """
 import os
-from openai import OpenAI
+
 from dotenv import load_dotenv
+from openai import APIError, APITimeoutError, AuthenticationError, OpenAI
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
 from vectorstore import rechercher
 
 load_dotenv()
@@ -12,11 +16,34 @@ load_dotenv()
 MODEL = "gpt-4o-mini"
 
 
+LLM_TIMEOUT = 30  # secondes
+
+
 def _get_client() -> OpenAI:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("OPENAI_API_KEY manquante dans .env")
-    return OpenAI(api_key=api_key)
+    return OpenAI(api_key=api_key, timeout=LLM_TIMEOUT)
+
+
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=10),
+    retry=retry_if_exception_type((APITimeoutError, APIError)),
+    reraise=True,
+)
+def _appel_llm(client: OpenAI, system_prompt: str, user_prompt: str) -> str:
+    """Appel LLM avec retry automatique (3 tentatives, backoff exponentiel)."""
+    response = client.chat.completions.create(
+        model=MODEL,
+        temperature=0.2,
+        max_tokens=1024,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    )
+    return response.choices[0].message.content.strip()
 
 
 def rag_query(question: str, n_chunks: int = 3) -> dict:
@@ -62,17 +89,7 @@ def rag_query(question: str, n_chunks: int = 3) -> dict:
     user_prompt = f"Contexte :\n{contexte}\n\nQuestion : {question}"
 
     client = _get_client()
-    response = client.chat.completions.create(
-        model=MODEL,
-        temperature=0.2,
-        max_tokens=1024,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-    )
-
-    reponse = response.choices[0].message.content.strip()
+    reponse = _appel_llm(client, system_prompt, user_prompt)
 
     return {
         "reponse": reponse,
