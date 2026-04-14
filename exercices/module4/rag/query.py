@@ -10,6 +10,7 @@ from openai import APIError, APITimeoutError, AuthenticationError, OpenAI
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from vectorstore import rechercher
+from security import filtrer_sortie
 
 load_dotenv()
 
@@ -90,6 +91,7 @@ def rag_query(question: str, n_chunks: int = 3) -> dict:
 
     client = _get_client()
     reponse = _appel_llm(client, system_prompt, user_prompt)
+    reponse = filtrer_sortie(reponse)
 
     return {
         "reponse": reponse,

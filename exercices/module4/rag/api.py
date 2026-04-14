@@ -16,6 +16,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
 from query import rag_query
+from security import analyser_securite
 
 load_dotenv()
 
@@ -98,6 +99,11 @@ def ask(request: Request, req: QuestionRequest, x_api_key: str | None = Header(d
     Necessite le header X-API-Key.
     """
     _verifier_api_key(x_api_key)
+
+    # --- Garde de securite (M4E5) ---
+    check = analyser_securite(req.question)
+    if check["bloque"]:
+        raise HTTPException(status_code=400, detail=check["raison"])
 
     debut = time.time()
 
