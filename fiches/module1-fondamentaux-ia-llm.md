@@ -126,14 +126,14 @@ Reponse **systematiquement influencee** par des tendances desequilibrees dans le
 
 ### Comparaison des modeles
 
-| Critere | GPT-4o | Claude 3.7 | Mistral Large | Gemini |
+| Critere | GPT-4o | Claude 3.7 Sonnet | Mistral Large | Gemini 1.5 Pro |
 |---|---|---|---|---|
-| Raisonnement | 5/5 | 6/5 | 4/5 | 4/5 |
-| Generation texte | 5/5 | 6/5 | 4/5 | 4/5 |
-| Programmation | 5/5 | 4/5 | 4/5 | 4/5 |
-| Analyse docs | 4/5 | 6/5 | 3/5 | 4/5 |
-| Souverainete | Proprietaire | Proprietaire | Open source | Proprietaire |
-| Ideal pour | Analyse strategique | Redaction pro | Deploiement local | Recherche documentaire |
+| Raisonnement | 5/5 | 5/5 | 4/5 | 4/5 |
+| Generation texte | 5/5 | 5/5 | 4/5 | 4/5 |
+| Programmation | 5/5 | 5/5 | 4/5 | 4/5 |
+| Analyse docs | 4/5 | 5/5 | 3/5 | 4/5 |
+| Souverainete | Proprietaire (US) | Proprietaire (US) | Open source (FR) | Proprietaire (US) |
+| Ideal pour | Analyse strategique | Redaction pro, code | Deploiement local / souverainete EU | Recherche documentaire, contexte long |
 
 ---
 
@@ -196,15 +196,17 @@ Un **prompt** est l'ensemble des instructions fournies a un modele d'IA pour ori
 ### API REST (curl)
 
 ```bash
-curl https://api.openai.com/v1/responses \
+curl https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d '{
-    "model": "gpt-4.1",
-    "input": "Tu es un expert en support client B2B...",
+    "model": "gpt-4o-mini",
+    "messages": [
+      {"role": "system", "content": "Tu es un expert en support client B2B."},
+      {"role": "user", "content": "Comment relancer un client inactif ?"}
+    ],
     "temperature": 0.7,
-    "top_p": 0.9,
-    "max_output_tokens": 200
+    "max_tokens": 200
   }'
 ```
 
@@ -214,15 +216,19 @@ curl https://api.openai.com/v1/responses \
 from openai import OpenAI
 
 client = OpenAI()
-response = client.responses.create(
-    model="gpt-4.1",
-    input="Tu es un consultant senior en strategie...",
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "Tu es un consultant senior en strategie."},
+        {"role": "user", "content": "Analyse cette situation..."},
+    ],
     temperature=0.7,
-    top_p=0.9,
-    max_output_tokens=200,
+    max_tokens=200,
 )
-print(response.output_text)
+print(response.choices[0].message.content)
 ```
+
+> Note : l'API `/v1/responses` (et `client.responses.create`) est la nouvelle API OpenAI (2024+). Ce support utilise l'API `/v1/chat/completions`, plus repandue et utilisee par le fil rouge (cf. [`fil-rouge/llm.py`](../fil-rouge/llm.py)).
 
 ### Structured Outputs
 
@@ -283,7 +289,82 @@ Quand la reponse doit etre exploitee par une application, utiliser les Structure
 
 ---
 
-## 11. Personnalisation des modeles
+## 11. LLM en local : Ollama & LM Studio
+
+Faire tourner un LLM **sur sa propre machine** (sans cloud) est devenu realiste en 2026 : les modeles open source (Llama, Mistral, Qwen, DeepSeek) rivalisent avec GPT-3.5/4 sur de nombreux cas d'usage.
+
+### Pourquoi passer en local
+
+- **Confidentialite** : aucune donnee ne quitte votre reseau (crucial pour donnees legacy, sante, finance)
+- **Cout** : zero cout variable apres l'achat du hardware (vs $ par million de tokens en cloud)
+- **Offline** : fonctionne sans internet (usines, sites isoles)
+- **Souverainete** : echappement a la dependance vis-a-vis des fournisseurs US
+
+### Outils principaux
+
+| Outil | Type | Atout |
+|---|---|---|
+| **Ollama** | CLI + API REST | Le plus simple, compatible OpenAI API, `ollama pull mistral` et c'est parti |
+| **LM Studio** | Interface graphique | Visualisation des parametres, telechargement HuggingFace integre, ideal pour explorer |
+| **llama.cpp** | Bibliotheque C++ | Le moteur sous-jacent, inference optimisee CPU/GPU, format GGUF |
+| **vLLM** | Serveur Python | Performance maximale en serveur (batching), ideal pour production |
+
+### Utilisation Ollama
+
+```bash
+# Installation (macOS/Linux)
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Telecharger un modele
+ollama pull qwen2.5-coder:14b    # code
+ollama pull mistral:7b            # generaliste
+
+# API REST compatible OpenAI sur localhost:11434
+curl http://localhost:11434/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral:7b",
+    "messages": [{"role": "user", "content": "Bonjour"}]
+  }'
+```
+
+### Integration dans un agent Python
+
+```python
+from openai import OpenAI
+
+# Meme SDK, on change juste base_url
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama",  # requis mais non verifie
+)
+response = client.chat.completions.create(
+    model="mistral:7b",
+    messages=[{"role": "user", "content": "Resume ce texte..."}],
+)
+```
+
+> **A retenir** : Ollama expose une API compatible OpenAI. On peut basculer un agent du cloud vers le local en changeant uniquement la `base_url` — aucune autre modification de code.
+
+### Choisir le bon modele local
+
+| Taille | VRAM requise | Usage |
+|---|---|---|
+| 1-3B | 2-4 Go | Tests rapides, IoT |
+| 7-8B | 8 Go | Chat, code simple, RAG |
+| 14B | 16 Go | Code avance, raisonnement |
+| 30-70B | 48-96 Go | Taches complexes, proche de GPT-4 |
+
+### Quand rester sur du cloud
+
+- Besoin de la meilleure qualite (GPT-4o, Claude Opus)
+- Volumes faibles (cloud = moins cher en dessous de ~500 req/jour)
+- Pas d'expertise DevOps/infra disponible
+- Usage multimodal complexe (Vision, audio)
+
+---
+
+## 12. Personnalisation des modeles
 
 3 approches par ordre de complexite croissante :
 
@@ -305,3 +386,15 @@ Quand la reponse doit etre exploitee par une application, utiliser les Structure
 - Fiabiliser les reponses (strategies anti-hallucination, RAG)
 - Securiser l'usage (RGPD, anonymisation, gouvernance IA)
 - Integrer l'IA dans ses processus (prompting, RAG, fine-tuning)
+
+---
+
+## Voir aussi
+
+- **Exercices** :
+  - [M1E1 — Tokens](../exercices/module1/exercice1-tokens.md) — comptage, cout, decoupage
+  - [M1E2 — Hallucinations](../exercices/module1/exercice2-hallucinations.md) — detection et strategies
+  - [M1E3 — Comparer des LLM](../exercices/module1/exercice3-comparer-llm.md) — GPT-4o vs Claude vs Mistral
+  - [M1E4 — Parametres LLM](../exercices/module1/exercice4-parametres-llm.md) — temperature, top-p, max_tokens
+  - [M1E5 — Strategies anti-hallucination](../exercices/module1/exercice5-strategies.md)
+- **Fil rouge** : [`fil-rouge/llm.py`](../fil-rouge/llm.py) — client OpenAI centralise

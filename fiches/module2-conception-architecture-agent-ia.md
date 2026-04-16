@@ -361,3 +361,14 @@ Un projet d'agent IA est un projet transversal qui mobilise plusieurs expertises
 - Integrer la securite et la gouvernance des la conception
 - Structurer les donnees et la preparation pour un agent performant
 - Impliquer les bonnes parties prenantes dans un projet d'agent IA
+
+---
+
+## Voir aussi
+
+- **Exercices** :
+  - [M2E1 — Matrice de priorisation](../exercices/module2/exercice1-matrice-priorisation.md)
+  - [M2E2 — Patterns d'agents](../exercices/module2/exercice2-patterns-agents.md) — reactif, ReAct, planificateur
+  - [M2E3 — Specification d'outils](../exercices/module2/exercice3-specification-outils.md)
+  - [M2E4 — Cahier des charges](../exercices/module2/exercice4-cahier-des-charges.md)
+- **Fil rouge** : [`fil-rouge/docs/ARCHITECTURE.md`](../fil-rouge/docs/ARCHITECTURE.md) — architecture de l'agent de veille technologique

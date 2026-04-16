@@ -173,21 +173,28 @@ L'agent devient une **brique active du Systeme d'Information**, exposee via des 
 
 ```python
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.post("/ask")
-def ask_agent(question: str):
+class AskRequest(BaseModel):
+    question: str
+
+class AskResponse(BaseModel):
+    answer: str
+    status: str
+
+@app.post("/ask", response_model=AskResponse)
+def ask_agent(req: AskRequest):
     """Endpoint principal de l'agent."""
-    response = agent.run(question)
-    return {
-        "answer": response,
-        "status": "success"
-    }
+    response = agent.run(req.question)
+    return AskResponse(answer=response, status="success")
 
 # Lancement : uvicorn main:app --reload
 # Documentation auto : http://localhost:8000/docs
 ```
+
+> **Bonne pratique** : typer les entrees/sorties avec Pydantic (`BaseModel`). FastAPI genere alors la validation automatique, les erreurs 422 explicites et la doc Swagger complete. Cf. [`fil-rouge/api.py`](../fil-rouge/api.py) pour l'implementation reelle.
 
 > FastAPI genere automatiquement une documentation interactive (Swagger UI) accessible sur `/docs`. Ideal pour partager l'API avec les equipes front ou les integrateurs metier.
 
@@ -349,3 +356,18 @@ Les participants construisent un **agent IA complet et fonctionnel**, ancre dans
 - Connecter l'agent aux systemes existants : APIs REST, webhooks, outils metier (CRM, ticketing, messagerie) et automatisation no-code
 - Exposer et securiser un agent en production : FastAPI, gestion des erreurs, gouvernance RGPD, journalisation et controle d'acces
 - Automatiser des workflows metier complets : de l'evenement declencheur a l'action dans l'outil, en passant par l'analyse contextuelle de l'agent
+
+---
+
+## Voir aussi
+
+- **Exercices** :
+  - [M4E1 — Pipeline RAG](../exercices/module4/exercice1-pipeline-rag.md) — ChromaDB, pdfplumber, corpus CNIL
+  - [M4E2 — FastAPI](../exercices/module4/exercice2-fastapi.md) — exposition de l'agent RAG en API
+  - [M4E3 — Robustesse](../exercices/module4/exercice3-robustesse.md) — gestion d'erreurs, retry, timeouts
+  - [M4E4 — Multimodal](../exercices/module4/exercice4-multimodal.md) — audio (Whisper) + image (Vision)
+  - [M4E5 — Securite](../exercices/module4/exercice5-securite.md) — 4 barrieres, prompt injection
+- **Fil rouge** :
+  - [`fil-rouge/tools/rag.py`](../fil-rouge/tools/rag.py) — RAG numpy (similarite cosinus)
+  - [`fil-rouge/security.py`](../fil-rouge/security.py) — 4 barrieres de securite operationnelles
+  - [`fil-rouge/api.py`](../fil-rouge/api.py) — wrapper FastAPI avec Pydantic

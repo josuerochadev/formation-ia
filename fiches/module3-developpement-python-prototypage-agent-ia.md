@@ -144,12 +144,54 @@ En production, on delegue cette logique a un framework.
 
 ### Frameworks recommandes
 
-| Framework | Forces |
-|---|---|
-| **LangChain** | Ecosysteme riche, tres populaire, nombreux connecteurs prets a l'emploi |
-| **LlamaIndex** | Oriente RAG et indexation de donnees, excellent pour les agents documentaires |
+| Framework | Forces | Ideal pour |
+|---|---|---|
+| **LangChain** | Ecosysteme riche, tres populaire, nombreux connecteurs prets a l'emploi | Agents multi-tools, chaines complexes, prototypage rapide |
+| **LlamaIndex** | Oriente RAG et indexation de donnees, connecteurs documentaires puissants | Agents documentaires, bases de connaissances |
+| **n8n** | No-code/low-code, workflow visuel, auto-hebergeable | Equipes non techniques, integrations rapides |
+| **OpenAI Agents SDK** | Leger, officiel, handoffs multi-agents | Agents simples bases sur l'ecosysteme OpenAI |
 
 Ces frameworks gerent nativement le routing des tools, la gestion de la memoire et l'orchestration multi-etapes.
+
+### Exemple minimaliste — LangChain
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.tools import tool
+
+@tool
+def rechercher_commande(numero: str) -> str:
+    """Recherche une commande par son numero et retourne son statut."""
+    # ... logique metier
+    return f"Commande {numero} : expediee le 15/04"
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "Tu es un assistant support client."),
+    ("human", "{input}"),
+    ("placeholder", "{agent_scratchpad}"),
+])
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+agent = create_tool_calling_agent(llm, [rechercher_commande], prompt)
+executor = AgentExecutor(agent=agent, tools=[rechercher_commande])
+
+result = executor.invoke({"input": "Ou en est la commande CMD-4521 ?"})
+print(result["output"])
+```
+
+LangChain gere pour vous la boucle ReAct, le parsing des tool calls et les erreurs. **Contrepartie** : abstraction plus lourde, plus difficile a debugger. Pour apprendre, commencez par implementer ReAct a la main (cf. fil-rouge) avant d'utiliser un framework.
+
+### Quand utiliser un framework ?
+
+| Situation | Recommandation |
+|---|---|
+| Prototype, apprentissage | **Code maison** (comme le fil-rouge) pour comprendre le mecanisme |
+| Production, 1-3 tools | Code maison + Pydantic (contrôle maximal) |
+| Production, 5+ tools complexes | **LangChain** ou **OpenAI Agents SDK** |
+| RAG documentaire massif | **LlamaIndex** |
+| Pas de devs dans l'equipe | **n8n** ou **Make** (no-code) |
 
 ---
 
@@ -379,3 +421,18 @@ Les 8 etapes du cycle de vie d'un agent IA en Python :
 - Construire un pipeline RAG complet (chunking, embeddings, recuperation, generation)
 - Connecter l'agent a des systemes externes (APIs REST, webhooks, CRM, messagerie)
 - Debugger et instrumenter un agent avec des logs structures
+
+---
+
+## Voir aussi
+
+- **Exercices** :
+  - [M3E1 — Structurer un projet agent](../exercices/module3/exercice1-structurer-projet.md)
+  - [M3E2 — Structured Outputs JSON](../exercices/module3/exercice2-json-structuring.md)
+  - [M3E3 — Agent ReAct](../exercices/module3/exercice3-react-agent.md)
+  - [M3E4 — Memoire de session](../exercices/module3/exercice4-memoire.md)
+  - [M3E5 — Debugging d'agent](../exercices/module3/exercice5-debugging.md)
+- **Fil rouge** :
+  - [`fil-rouge/main.py`](../fil-rouge/main.py) — boucle ReAct complete (choisir_outil, executer_outil, formuler_reponse)
+  - [`fil-rouge/tools/`](../fil-rouge/tools/) — search, database, rag, transcribe, vision
+  - [`fil-rouge/memory/`](../fil-rouge/memory/) — memoire de session (deque)

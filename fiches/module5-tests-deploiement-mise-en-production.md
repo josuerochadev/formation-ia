@@ -392,3 +392,17 @@ Exposer dans l'API via un endpoint `/metrics` accessible en temps reel.
 - Conteneuriser un agent avec Docker (Dockerfile, build, run, healthcheck) et le deployer dans le cloud (GCP Cloud Run, AWS, Scaleway)
 - Implementer un monitoring operationnel (metriques, dashboard, alertes) et mesurer l'impact metier (KPIs, ROI)
 - Piloter la conduite du changement : plan de deploiement en 3 phases, gestion des resistances, maintenance continue
+
+---
+
+## Voir aussi
+
+- **Exercices** :
+  - [M5E1 — Tests unitaires](../exercices/module5/exercice1-tests-unitaires.md) — 85 tests deterministes sur les tools
+  - [M5E2 — Tests d'integration](../exercices/module5/exercice2-tests-integration.md) — routing, memoire, erreurs
+  - [M5E3 — LLM-as-Judge](../exercices/module5/exercice3-llm-as-judge.md) — evaluation qualite automatisee (10 questions, 3 criteres)
+  - [M5E4 — Containerisation Docker](../exercices/module5/exercice4-docker.md) — Dockerfile + FastAPI, healthcheck
+- **Fil rouge** :
+  - [`fil-rouge/tests/`](../fil-rouge/tests/) — suite de tests pytest
+  - [`fil-rouge/Dockerfile`](../fil-rouge/Dockerfile) — image python:3.11-slim + uvicorn
+  - [`fil-rouge/api.py`](../fil-rouge/api.py) — endpoints `/health` et `/ask`

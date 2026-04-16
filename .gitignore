@@ -24,6 +24,9 @@ chromadb_data/
 *.pptx
 *.pdf
 
+# Support PDFs de la formation (droit d'auteur AJC Formation)
+fiches/pdf/
+
 # PDF corpus (too large for git)
 exercices/**/cnil/
 
