@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "question": "Quelles sont les recommandations de la CNIL en matière de sécurité des mots de passe ?",
+    "document_attendu": "cnil_guide_securite_personnelle_2024.pdf",
+    "section_attendue": "Authentification / mots de passe",
+    "mots_cles": ["mot de passe", "authentification", "longueur minimale"]
+  },
+  {
+    "id": 2,
+    "question": "Quels sont les droits des personnes concernées en matière de données personnelles selon le RGPD ?",
+    "document_attendu": "bpi-cnil-rgpd_guide-tpe-pme.pdf",
+    "section_attendue": "Droits des personnes",
+    "mots_cles": ["droit d'accès", "droit à l'effacement", "portabilité"]
+  },
+  {
+    "id": 3,
+    "question": "Comment réaliser une analyse d'impact relative à la protection des données (AIPD) ?",
+    "document_attendu": "cnil-pia-2-fr-modeles.pdf",
+    "section_attendue": "Méthodologie PIA",
+    "mots_cles": ["analyse d'impact", "PIA", "AIPD", "risques"]
+  },
+  {
+    "id": 4,
+    "question": "Quelles sont les obligations du délégué à la protection des données (DPO) ?",
+    "document_attendu": "guide_pratique_rgpd_-_delegues_a_la_protection_des_donnees.pdf",
+    "section_attendue": "Missions du DPO",
+    "mots_cles": ["délégué", "DPO", "désignation", "missions"]
+  },
+  {
+    "id": 5,
+    "question": "Quelles sont les règles concernant les cookies et traceurs sur les sites web ?",
+    "document_attendu": "recommandation_cookies_consolidee.pdf",
+    "section_attendue": "Consentement cookies",
+    "mots_cles": ["cookies", "traceurs", "consentement", "bandeau"]
+  },
+  {
+    "id": 6,
+    "question": "Comment la CNIL recommande-t-elle de gérer les violations de données personnelles dans les établissements scolaires ?",
+    "document_attendu": "guide_violations_education_dpo.pdf",
+    "section_attendue": "Gestion des violations",
+    "mots_cles": ["violation", "notification", "éducation", "72 heures"]
+  },
+  {
+    "id": 7,
+    "question": "Quelles sont les recommandations de la CNIL pour les applications mobiles en matière de collecte de données ?",
+    "document_attendu": "recommandation-applications-mobiles.pdf",
+    "section_attendue": "Collecte données mobiles",
+    "mots_cles": ["application mobile", "permission", "collecte", "consentement"]
+  },
+  {
+    "id": 8,
+    "question": "Comment la CNIL encadre-t-elle l'utilisation de l'intelligence artificielle en santé ?",
+    "document_attendu": "guide_has_cnil_recommandations_ia.pdf",
+    "section_attendue": "IA en santé",
+    "mots_cles": ["intelligence artificielle", "santé", "algorithme", "données de santé"]
+  },
+  {
+    "id": 9,
+    "question": "Quelles sont les mesures de cybersécurité recommandées par la CNIL pour les entreprises ?",
+    "document_attendu": "cnil_plaquette_cybersecurite_2025.pdf",
+    "section_attendue": "Mesures de cybersécurité",
+    "mots_cles": ["cybersécurité", "chiffrement", "sauvegarde", "protection"]
+  },
+  {
+    "id": 10,
+    "question": "Quelles sont les conditions de validité du consentement selon les lignes directrices du CEPD ?",
+    "document_attendu": "lignes_directrices_du_cepd_sur_le_consentement.pdf",
+    "section_attendue": "Conditions du consentement",
+    "mots_cles": ["consentement", "libre", "spécifique", "éclairé", "univoque"]
+  }
+]

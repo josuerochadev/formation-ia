@@ -1,0 +1,202 @@
+[
+  {
+    "question": "Quelles sont les dernières tendances en intelligence artificielle en 2026 ?",
+    "input_tokens": 1376,
+    "output_tokens": 324,
+    "cout_input": 0.004128,
+    "cout_output": 0.00486,
+    "cout_total": 0.008988,
+    "latence_ms": 918.9,
+    "reponse": "[SIMULATION] Réponse à : Quelles sont les dernières tendances en intelligence artificielle en 2026 ?..."
+  },
+  {
+    "question": "Résume les avantages du cloud-native par rapport au monolithique.",
+    "input_tokens": 1365,
+    "output_tokens": 181,
+    "cout_input": 0.004095,
+    "cout_output": 0.002715,
+    "cout_total": 0.00681,
+    "latence_ms": 1293.5,
+    "reponse": "[SIMULATION] Réponse à : Résume les avantages du cloud-native par rapport au monolithique...."
+  },
+  {
+    "question": "Quels sont les principaux risques de cybersécurité pour les PME ?",
+    "input_tokens": 1374,
+    "output_tokens": 382,
+    "cout_input": 0.004122,
+    "cout_output": 0.00573,
+    "cout_total": 0.009852,
+    "latence_ms": 1248.8,
+    "reponse": "[SIMULATION] Réponse à : Quels sont les principaux risques de cybersécurité pour les PME ?..."
+  },
+  {
+    "question": "Explique le concept de RAG (Retrieval-Augmented Generation) en 3 phrases.",
+    "input_tokens": 1368,
+    "output_tokens": 291,
+    "cout_input": 0.004104,
+    "cout_output": 0.004365,
+    "cout_total": 0.008469,
+    "latence_ms": 2340.4,
+    "reponse": "[SIMULATION] Réponse à : Explique le concept de RAG (Retrieval-Augmented Generation) en 3 phrases...."
+  },
+  {
+    "question": "Compare Kubernetes et Docker Swarm pour l'orchestration de conteneurs.",
+    "input_tokens": 1369,
+    "output_tokens": 371,
+    "cout_input": 0.004107,
+    "cout_output": 0.0055650000000000005,
+    "cout_total": 0.009672,
+    "latence_ms": 1201.7,
+    "reponse": "[SIMULATION] Réponse à : Compare Kubernetes et Docker Swarm pour l'orchestration de conteneurs...."
+  },
+  {
+    "question": "Quelles certifications cloud sont les plus demandées en France ?",
+    "input_tokens": 1368,
+    "output_tokens": 304,
+    "cout_input": 0.004104,
+    "cout_output": 0.00456,
+    "cout_total": 0.008664,
+    "latence_ms": 1356.1,
+    "reponse": "[SIMULATION] Réponse à : Quelles certifications cloud sont les plus demandées en France ?..."
+  },
+  {
+    "question": "Comment fonctionne le fine-tuning d'un LLM avec DPO ?",
+    "input_tokens": 1370,
+    "output_tokens": 273,
+    "cout_input": 0.00411,
+    "cout_output": 0.004095,
+    "cout_total": 0.008205,
+    "latence_ms": 2092.5,
+    "reponse": "[SIMULATION] Réponse à : Comment fonctionne le fine-tuning d'un LLM avec DPO ?..."
+  },
+  {
+    "question": "Liste les 5 meilleures pratiques pour sécuriser une API REST.",
+    "input_tokens": 1375,
+    "output_tokens": 382,
+    "cout_input": 0.004125,
+    "cout_output": 0.00573,
+    "cout_total": 0.009855,
+    "latence_ms": 1042.6,
+    "reponse": "[SIMULATION] Réponse à : Liste les 5 meilleures pratiques pour sécuriser une API REST...."
+  },
+  {
+    "question": "Qu'est-ce que le Zero Trust et pourquoi est-ce important ?",
+    "input_tokens": 1367,
+    "output_tokens": 335,
+    "cout_input": 0.0041010000000000005,
+    "cout_output": 0.005025,
+    "cout_total": 0.009126,
+    "latence_ms": 808.0,
+    "reponse": "[SIMULATION] Réponse à : Qu'est-ce que le Zero Trust et pourquoi est-ce important ?..."
+  },
+  {
+    "question": "Explique la différence entre SAST et DAST en sécurité applicative.",
+    "input_tokens": 1373,
+    "output_tokens": 202,
+    "cout_input": 0.004119,
+    "cout_output": 0.00303,
+    "cout_total": 0.007149000000000001,
+    "latence_ms": 1612.1,
+    "reponse": "[SIMULATION] Réponse à : Explique la différence entre SAST et DAST en sécurité applicative...."
+  },
+  {
+    "question": "Quels sont les avantages de Terraform par rapport à CloudFormation ?",
+    "input_tokens": 1375,
+    "output_tokens": 206,
+    "cout_input": 0.004125,
+    "cout_output": 0.00309,
+    "cout_total": 0.007215,
+    "latence_ms": 2273.8,
+    "reponse": "[SIMULATION] Réponse à : Quels sont les avantages de Terraform par rapport à CloudFormation ?..."
+  },
+  {
+    "question": "Comment mettre en place un pipeline CI/CD avec GitHub Actions ?",
+    "input_tokens": 1371,
+    "output_tokens": 243,
+    "cout_input": 0.004113,
+    "cout_output": 0.0036450000000000002,
+    "cout_total": 0.007758000000000001,
+    "latence_ms": 1880.9,
+    "reponse": "[SIMULATION] Réponse à : Comment mettre en place un pipeline CI/CD avec GitHub Actions ?..."
+  },
+  {
+    "question": "Qu'est-ce qu'un SLO et comment le définir pour un service web ?",
+    "input_tokens": 1377,
+    "output_tokens": 226,
+    "cout_input": 0.004131,
+    "cout_output": 0.0033900000000000002,
+    "cout_total": 0.007521,
+    "latence_ms": 2478.3,
+    "reponse": "[SIMULATION] Réponse à : Qu'est-ce qu'un SLO et comment le définir pour un service web ?..."
+  },
+  {
+    "question": "Explique le concept de chaos engineering et ses bénéfices.",
+    "input_tokens": 1368,
+    "output_tokens": 273,
+    "cout_input": 0.004104,
+    "cout_output": 0.004095,
+    "cout_total": 0.008199,
+    "latence_ms": 1541.4,
+    "reponse": "[SIMULATION] Réponse à : Explique le concept de chaos engineering et ses bénéfices...."
+  },
+  {
+    "question": "Quelles sont les bases de données vectorielles les plus populaires ?",
+    "input_tokens": 1372,
+    "output_tokens": 339,
+    "cout_input": 0.004116,
+    "cout_output": 0.005085,
+    "cout_total": 0.009201,
+    "latence_ms": 1108.9,
+    "reponse": "[SIMULATION] Réponse à : Quelles sont les bases de données vectorielles les plus populaires ?..."
+  },
+  {
+    "question": "Comment fonctionne Apache Kafka pour le streaming de données ?",
+    "input_tokens": 1373,
+    "output_tokens": 329,
+    "cout_input": 0.004119,
+    "cout_output": 0.004935,
+    "cout_total": 0.009054,
+    "latence_ms": 1701.7,
+    "reponse": "[SIMULATION] Réponse à : Comment fonctionne Apache Kafka pour le streaming de données ?..."
+  },
+  {
+    "question": "Qu'est-ce que le platform engineering et pourquoi ça émerge ?",
+    "input_tokens": 1375,
+    "output_tokens": 202,
+    "cout_input": 0.004125,
+    "cout_output": 0.00303,
+    "cout_total": 0.007155,
+    "latence_ms": 1647.5,
+    "reponse": "[SIMULATION] Réponse à : Qu'est-ce que le platform engineering et pourquoi ça émerge ?..."
+  },
+  {
+    "question": "Résume les points clés de la directive NIS2 pour les entreprises IT.",
+    "input_tokens": 1368,
+    "output_tokens": 319,
+    "cout_input": 0.004104,
+    "cout_output": 0.004785,
+    "cout_total": 0.008889000000000001,
+    "latence_ms": 2294.3,
+    "reponse": "[SIMULATION] Réponse à : Résume les points clés de la directive NIS2 pour les entreprises IT...."
+  },
+  {
+    "question": "Comment OpenTelemetry améliore l'observabilité d'un système distribué ?",
+    "input_tokens": 1366,
+    "output_tokens": 234,
+    "cout_input": 0.004098,
+    "cout_output": 0.00351,
+    "cout_total": 0.007608,
+    "latence_ms": 1402.9,
+    "reponse": "[SIMULATION] Réponse à : Comment OpenTelemetry améliore l'observabilité d'un système distribué ?..."
+  },
+  {
+    "question": "Quels sont les design patterns essentiels pour les microservices ?",
+    "input_tokens": 1366,
+    "output_tokens": 276,
+    "cout_input": 0.004098,
+    "cout_output": 0.0041400000000000005,
+    "cout_total": 0.008238,
+    "latence_ms": 1418.4,
+    "reponse": "[SIMULATION] Réponse à : Quels sont les design patterns essentiels pour les microservices ?..."
+  }
+]
