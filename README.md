@@ -5,7 +5,6 @@ Dépôt regroupant les travaux réalisés dans le cadre de la formation "Concevo
 ## Structure
 
 ```
-├── fil-rouge/       # Projet fil rouge : agent de veille technologique
 ├── exercices/       # Exercices pratiques par module
 └── fiches/          # Fiches de synthèse et notes de cours
 ```
@@ -25,7 +24,7 @@ Dépôt regroupant les travaux réalisés dans le cadre de la formation "Concevo
 
 **Agent de veille technologique** : agent IA automatisé qui collecte des articles RSS, les enrichit via LLM (résumé, catégorisation, pertinence), et propose un agent conversationnel avec raisonnement ReAct et recherche sémantique (RAG).
 
-Voir [fil-rouge/README.md](fil-rouge/README.md) pour les détails.
+Le code source a été extrait dans son propre dépôt : **[josuerochadev/luciole](https://github.com/josuerochadev/luciole)**
 
 ## Équipe
 
